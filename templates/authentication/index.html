@@ -1,0 +1,6 @@
+<h1>AUTH IS WORKING!</h1>
+
+{% if user.is_authenticated %}
+<h2>{{user.username}}</h2>
+  <a href="{% url 'logout' %}">Logout</a>
+{% endif %}

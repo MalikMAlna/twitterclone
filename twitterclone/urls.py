@@ -25,6 +25,11 @@ from authentication import views as auth_views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', auth_views.index, name="homepage"),
+    path('login/', auth_views.loginview, name='login-page'),
+    path('logout/', auth_views.logoutview, name='logout'),
+    path('register/', auth_views.registration_view, name='register'),
+
+
     # path('notifications/', notif_views.index, name="notifications-page"),
     # path('tweet/', auth_views.index, name="tweet-details"),
     # path('twitteruser/', auth_views.index, name="profile-page"),

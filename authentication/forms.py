@@ -12,6 +12,7 @@ class RegistrationForm(UserCreationForm):
 
     class Meta:
         model = TwitterUser
+        fields = ('username', 'email', 'password1', 'password2')
 
 
 class LoginForm(forms.Form):
