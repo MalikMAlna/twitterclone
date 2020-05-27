@@ -129,4 +129,4 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-# AUTH_USER_MODEL = 'twitteruser.TwitterUser'
+AUTH_USER_MODEL = 'twitteruser.TwitterUser'

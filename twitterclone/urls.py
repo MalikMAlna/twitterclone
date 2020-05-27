@@ -14,8 +14,18 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path, include
+from django.urls import path
+
+
+from authentication import views as auth_views
+from notifications import views as notif_views
+from tweet import views as tweet_views
+from twitteruser import views as user_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', auth_views.index, name="homepage"),
+    path('notifications/', notif_views.index, name="notifications-page"),
+    path('tweet/', auth_views.index, name="tweet-details"),
+    path('twitteruser/', auth_views.index, name="profile-page"),
 ]
