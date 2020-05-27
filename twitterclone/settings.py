@@ -33,17 +33,19 @@ LOGOUT_URL = "/"
 # Application definition
 
 INSTALLED_APPS = [
+    'authentication.apps.AuthenticationConfig',
+    'notifications.apps.NotificationsConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'tweet.apps.TweetConfig',
+    'twitteruser.apps.TwitteruserConfig',
 ]
 
 MIDDLEWARE = [
-    'authentication.apps.AuthenticationConfig',
-    'notifications.apps.NotificationsConfig',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -51,8 +53,6 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'tweet.apps.TweetConfig',
-    'twitteruser.apps.TwitteruserConfig',
 ]
 
 ROOT_URLCONF = 'twitterclone.urls'
@@ -129,4 +129,4 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-AUTH_USER_MODEL = 'twitteruser.TwitterUser'
+# AUTH_USER_MODEL = 'twitteruser.TwitterUser'
