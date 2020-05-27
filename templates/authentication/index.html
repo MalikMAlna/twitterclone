@@ -2,16 +2,10 @@
 
 {% if user.is_authenticated %}
 <h2>{{user.username}}</h2>
+<a href="{% url 'tweet-add'%}">Write Tweet</a>
+<br>
+<br>
 <a href="#">View Profile</a>
-<br>
-<br>
-<div>
-<form action="" method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <input type="submit" value="Submit">
-</form>
-</div>
 <br>
 <br>
   <a href="{% url 'logout' %}">Logout</a>
