@@ -1,6 +1,7 @@
 <h2>User Profile</h2>
 <h4>Username: @{{author}}</h4>
 <h4>Tweets Written: {{personal_tweet_count}}</h4>
+<h4>Following: {{users_followed_count}} Users</h4>
 {% if user.is_authenticated %}
     {% if user != author %}
         {% if author not in user.followers.all %}
