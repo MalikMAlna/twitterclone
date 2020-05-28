@@ -20,7 +20,7 @@ from django.urls import path
 from authentication import views as auth_views
 from notifications import views as notif_views
 from tweet import views as tweet_views
-# from twitteruser import views as user_views
+from twitteruser import views as user_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -30,7 +30,11 @@ urlpatterns = [
     path('register/', auth_views.registration_view, name='register'),
     path('tweet-add/', tweet_views.tweetadd, name='tweet-add'),
     path('show-notifications/', notif_views.show_notifications,
-         name="show-notifications")
+         name="show-notifications"),
+    path('twitter-user/<int:pk>',
+         user_views.TwitterUserDetailView.as_view(),
+         name='user-detail'
+         ),
 
 
     # path('notifications/', notif_views.index, name="notifications-page"),

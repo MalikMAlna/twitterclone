@@ -3,6 +3,8 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from .forms import AddTweetForm
 from .models import Tweet
+# from notifications.models import Notification
+# import re
 
 
 @login_required
@@ -17,6 +19,13 @@ def tweetadd(request):
                 text=data['text'],
                 user=request.user
             )
+            # if re.search(
+            # r'(?<=^|(?<=[^a-zA-Z0-9-_\.]))@([A-Za-z]+[A-Za-z0-9-_]+)',
+            # data['text']):
+            #     Notification.objects.create(
+            #         tweet=,
+            #         tweet_author=
+            #     )
             messages.info(request, "Tweet created successfully!")
             return HttpResponseRedirect(reverse('homepage'))
 
