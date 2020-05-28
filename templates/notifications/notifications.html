@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% block content %}
+{% for notification in notifications %}
+{%if notification.viewed == False %}
+<h2>{{notification.tweet.text}}</h2>
+<h2>By: @{{notification.tweet_author.username}}</h2>
+{% endfor %}
+
+{% endblock content %}

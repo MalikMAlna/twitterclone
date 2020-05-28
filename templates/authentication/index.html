@@ -8,5 +8,15 @@
 <a href="#">View Profile</a>
 <br>
 <br>
+<a href="#">View Notifcations ({{my_notifications_count}})</a>
+<br>
+<br>
   <a href="{% url 'logout' %}">Logout</a>
+<br>
+<br>
+<h2>My Feed</h2>
+{% for tweet in my_tweets %}
+<p>{{tweet.text}}</p>
+<h4> - @{{tweet.user}}</h4>
+{% endfor %}
 {% endif %}
