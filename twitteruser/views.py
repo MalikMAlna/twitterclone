@@ -1,13 +1,18 @@
-from django.views.generic.detail import DetailView
 from .models import TwitterUser
 from tweet.models import Tweet
+from django.views import View
+from django.shortcuts import render
 
 
-class TwitterUserDetailView(DetailView):
-    model = TwitterUser
-    context_object_name = 'twitter_user'
+class TwitterUserDetailView(View):
+    html = "twitteruser/twitteruser_detail.html"
 
-    def get_context_data(self, **kwargs):
-        context = super(DetailView, self).get_context_data(**kwargs)
-        context['personal_tweets_count'] = Tweet.objects.all().count()
-        return context
+    def get(self, request, pk):
+        author = TwitterUser.objects.get(pk=pk)
+
+        personal_tweet_count = Tweet.objects.filter(
+            user=author).count()
+        return render(request,
+                      self.html,
+                      {"author": author,
+                       "personal_tweet_count": personal_tweet_count})

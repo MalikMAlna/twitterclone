@@ -16,6 +16,7 @@
 <br>
 <h2>My Feed</h2>
 {% for tweet in my_tweets %}
+<p>Tweet &nbsp; &nbsp;<a href="{% url 'tweet-detail' tweet.pk %}">{{tweet.created}}</a></p>
 <p>{{tweet.text}}</p>
 <h4> - @{{tweet.user}}</h4>
 {% endfor %}

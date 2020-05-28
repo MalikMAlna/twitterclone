@@ -35,6 +35,10 @@ urlpatterns = [
          user_views.TwitterUserDetailView.as_view(),
          name='user-detail'
          ),
+    path('tweet/<int:pk>',
+         tweet_views.TweetDetailView.as_view(),
+         name='tweet-detail'
+         ),
 
 
     # path('notifications/', notif_views.index, name="notifications-page"),
