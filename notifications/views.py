@@ -1,17 +1,25 @@
 from django.shortcuts import render
-from django.http import HttpResponseRedirect
-from twitteruser.models import TwitterUser
-from tweet.models import Tweet
 from notifications.models import Notification
+from django.contrib.auth.decorators import login_required
 
 
-def show_notifications(request, id):
+@login_required
+def show_notifications(request):
     html = 'notifications/notifications.html'
-    tweet_author = TwitterUser.objects.get(id=id)
-    notifications = Notification.objects.filter(tweet_author=tweet_author)
+    notifications = Notification.objects.filter(tweet_author=request.user)
+
+    rendered = render(request, html, {"notifications": notifications})
 
     for notification in notifications:
         notification.viewed = True
         notification.save()
+    return rendered
 
-    return render(request, html, {"notifications": notifications})
+# def remove_notifications(request):
+#     html = 'notifications/notifications.html'
+#     notifications = Notification.objects.filter(tweet_author=request.user)
+
+#     for notification in notifications:
+#         notification.viewed = True
+#         notification.save()
+#     return render(request, html, {"notifications": notifications})

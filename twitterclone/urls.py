@@ -39,6 +39,14 @@ urlpatterns = [
          tweet_views.TweetDetailView.as_view(),
          name='tweet-detail'
          ),
+    path('follow-user/<int:user_pk>',
+         user_views.follow_user,
+         name='follow-user'
+         ),
+    path('unfollow-user/<int:user_pk>',
+         user_views.unfollow_user,
+         name='unfollow-user'
+         ),
 
 
     # path('notifications/', notif_views.index, name="notifications-page"),

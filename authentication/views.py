@@ -6,18 +6,26 @@ from .forms import RegistrationForm, LoginForm
 from tweet.models import Tweet
 from twitteruser.models import TwitterUser
 from notifications.models import Notification
+from django.db.models import Q
 
 
 @login_required
 def index(request):
     tweet_author = TwitterUser.objects.get(id=request.user.id)
-    my_tweets = Tweet.objects.filter(user=tweet_author)
+    user_tweets = Tweet.objects.filter(user=request.user)
+    follower_tweets = Tweet.objects.filter(
+        user__in=request.user.followers.all())
+    my_tweets = user_tweets | follower_tweets
+    my_tweets.order_by("-created")
+    # https://stackoverflow.com
+    # /questions/431628
+    # /how-to-combine-two-or-more-querysets-in-a-django-view#434755
     my_notifications_count = Notification.objects.filter(
         tweet_author=tweet_author, viewed=False).count()
     return render(request,
                   'authentication/index.html',
                   {"my_tweets": my_tweets,
-                   "my_notifications_count": my_notifications_count, }
+                   "my_notifications_count": my_notifications_count}
                   )
 
 

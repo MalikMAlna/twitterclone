@@ -8,7 +8,7 @@
 <a href="{% url 'user-detail' user.pk %}">View Profile</a>
 <br>
 <br>
-<a href="#">View Notifcations ({{my_notifications_count}})</a>
+<a href="{% url 'show-notifications' %}">View Notifcations ({{my_notifications_count}})</a>
 <br>
 <br>
   <a href="{% url 'logout' %}">Logout</a>
@@ -18,6 +18,6 @@
 {% for tweet in my_tweets %}
 <p>Tweet &nbsp; &nbsp;<a href="{% url 'tweet-detail' tweet.pk %}">{{tweet.created}}</a></p>
 <p>{{tweet.text}}</p>
-<h4> - @{{tweet.user}}</h4>
+<h4> - <a href="{%url 'user-detail' tweet.user.pk %}">@{{tweet.user}}</a></h4>
 {% endfor %}
 {% endif %}

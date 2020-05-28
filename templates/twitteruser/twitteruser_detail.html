@@ -1,6 +1,15 @@
 <h2>User Profile</h2>
 <h4>Username: @{{author}}</h4>
 <h4>Tweets Written: {{personal_tweet_count}}</h4>
+{% if user.is_authenticated %}
+    {% if user != author %}
+        {% if author not in user.followers.all %}
+        <a href="{% url 'follow-user' author.pk %}">Follow</a>
+    {% else %}
+        <a href="{% url 'unfollow-user' author.pk %}">Unfollow</a>
+        {%endif%}
+    {% endif %}
+{% endif %}
 <br>
 <br>
 <a href="/">Return To The Homepage</a>
