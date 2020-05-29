@@ -18,6 +18,10 @@ def index(request):
     user_tweets = Tweet.objects.filter(user=request.user).order_by("-created")
     follower_tweets = Tweet.objects.filter(
         user__in=request.user.followers.all()).order_by("-created")
+    # Referenced this with advice from Matt P.
+    # https://stackoverflow.com/
+    # questions/431628/
+    # how-to-combine-two-or-more-querysets-in-a-django-view#434755
     my_tweets = user_tweets | follower_tweets
     # https://stackoverflow.com
     # /questions/431628
