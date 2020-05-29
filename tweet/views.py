@@ -26,6 +26,10 @@ def tweetadd(request):
                 text=data['text'],
                 user=request.user
             )
+# Modified this for current regex
+# https://stackoverflow.com/questions/2304632/regex-for-twitter-username
+# Also referenced this for regex:
+# https://www.guru99.com/python-regular-expressions-complete-tutorial.html
         text_list = re.findall(r'@([A-Za-z]+[A-Za-z0-9-_]+)', data['text'])
         if "@" in data['text']:
             for t_user in text_list:

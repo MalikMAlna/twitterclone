@@ -5,21 +5,26 @@ from django.views import View
 from django.contrib.auth.decorators import login_required
 
 
+# Referenced this from Matt P.'s advice for views:
+# https://docs.djangoproject.com/en/3.0/topics/class-based-views/intro/
 class TwitterUserDetailView(View):
     html = "twitteruser/twitteruser_detail.html"
 
     def get(self, request, pk):
         author = TwitterUser.objects.get(pk=pk)
-        user = TwitterUser.objects.get(id=request.user.id)
+        self_user = TwitterUser.objects.get(username=request.user)
         personal_tweet_count = Tweet.objects.filter(
             user=author).count()
-        users_followed_count = TwitterUser.objects.filter(
-            followers=author).count()
+        users_followed_count = self_user.followers.all().count()
         return render(request,
                       self.html,
                       {"author": author,
                        "personal_tweet_count": personal_tweet_count,
                        "users_followed_count": users_followed_count})
+
+# Referenced this from Matt P.'s advice
+# for following functionality:
+# https://docs.djangoproject.com/en/3.0/ref/models/relations/
 
 
 @login_required

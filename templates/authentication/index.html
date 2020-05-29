@@ -1,5 +1,7 @@
-<h1>AUTH IS WORKING!</h1>
-
+<h1>Twitter Clone</h1>
+<p>Now with less styling and features!</p>
+<br>
+<br>
 {% if user.is_authenticated %}
 <h2>{{user.username}}</h2>
 <a href="{% url 'tweet-add'%}">Write Tweet</a>

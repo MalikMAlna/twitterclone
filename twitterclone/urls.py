@@ -15,7 +15,9 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-
+# For page structuring:
+# https://github.com/itsthejoker/
+# templatedemo-sharedfolder/blob/master/template_test/urls.py
 
 from authentication import views as auth_views
 from notifications import views as notif_views
@@ -47,9 +49,4 @@ urlpatterns = [
          user_views.unfollow_user,
          name='unfollow-user'
          ),
-
-
-    # path('notifications/', notif_views.index, name="notifications-page"),
-    # path('tweet/', auth_views.index, name="tweet-details"),
-    # path('twitteruser/', auth_views.index, name="profile-page"),
 ]
