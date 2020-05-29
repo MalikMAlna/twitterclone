@@ -10,6 +10,10 @@ from notifications.models import Notification
 
 @login_required
 def index(request):
+    # Referenced for correct use of order_by:
+    # https://stackoverflow.com/
+    # questions/9834038/
+    # django-order-by-query-set-ascending-and-descending
     tweet_author = TwitterUser.objects.get(id=request.user.id)
     user_tweets = Tweet.objects.filter(user=request.user).order_by("-created")
     follower_tweets = Tweet.objects.filter(
