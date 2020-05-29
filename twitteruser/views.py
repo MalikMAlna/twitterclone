@@ -12,10 +12,12 @@ class TwitterUserDetailView(View):
 
     def get(self, request, pk):
         author = TwitterUser.objects.get(pk=pk)
-        self_user = TwitterUser.objects.get(username=request.user)
+        # self_user = TwitterUser.objects.get(username=request.user)
         personal_tweet_count = Tweet.objects.filter(
             user=author).count()
-        users_followed_count = self_user.followers.all().count()
+        # Recommendation from Joe K. to use pk from author
+        # to pull relevant data without referencing logged-in user
+        users_followed_count = author.followers.all().count()
         return render(request,
                       self.html,
                       {"author": author,
