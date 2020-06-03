@@ -30,7 +30,7 @@ urlpatterns = [
     path('', auth_views.index, name="homepage"),
     path('login/', auth_views.loginview, name='login-page'),
     path('logout/', auth_views.logoutview, name='logout'),
-    path('register/', auth_views.registration_view, name='register'),
+    path('register/', auth_views.RegistrationFormView.as_view(), name='register'),
     path('tweet-add/', tweet_views.tweetadd, name='tweet-add'),
     path('show-notifications/',
          login_required(notif_views.ShowNotificationsView.as_view()),

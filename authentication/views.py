@@ -2,6 +2,8 @@ from django.shortcuts import render, reverse, HttpResponseRedirect
 from django.contrib import messages
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
+from django.urls import reverse_lazy
+from django.views.generic.edit import FormView
 from .forms import RegistrationForm, LoginForm
 from tweet.models import Tweet
 from twitteruser.models import TwitterUser
@@ -66,26 +68,41 @@ def logoutview(request):
     return HttpResponseRedirect(reverse('homepage'))
 
 
-def registration_view(request):
-    html = 'authentication/register.html'
-    context = {}
-    if request.POST:
-        form = RegistrationForm(request.POST)
-        if form.is_valid():
-            form.save()
-            username = form.cleaned_data.get('username')
-            raw_password = form.cleaned_data.get('password1')
-            account = authenticate(
-                username=username,
-                password=raw_password
-            )
-            login(request, account)
-            return HttpResponseRedirect(
-                request.GET.get('next', reverse('homepage'))
-            )
-        else:
-            context['registration_form'] = form
-    else:
-        form = RegistrationForm()
-        context['registration_form'] = form
-    return render(request, html, context)
+class RegistrationFormView(FormView):
+    template_name = 'authentication/register.html'
+    form_class = RegistrationForm
+    success_url = reverse_lazy('homepage')
+
+    def form_valid(self, form):
+        form.save()
+        username = form.cleaned_data.get('username')
+        raw_password = form.cleaned_data.get('password1')
+        account = authenticate(
+            username=username,
+            password=raw_password
+        )
+        login(account)
+        return super(RegistrationFormView, self).form_valid(form)
+    # def registration_view(request):
+    #     html = 'authentication/register.html'
+    #     context = {}
+    #     if request.POST:
+    #         form = RegistrationForm(request.POST)
+    #         if form.is_valid():
+    #             form.save()
+    #             username = form.cleaned_data.get('username')
+    #             raw_password = form.cleaned_data.get('password1')
+    #             account = authenticate(
+    #                 username=username,
+    #                 password=raw_password
+    #             )
+    #             login(request, account)
+    #             return HttpResponseRedirect(
+    #                 request.GET.get('next', reverse('homepage'))
+    #             )
+    #         else:
+    #             context['registration_form'] = form
+    #     else:
+    #         form = RegistrationForm()
+    #         context['registration_form'] = form
+    #     return render(request, html, context)
