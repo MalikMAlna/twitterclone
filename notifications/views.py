@@ -14,12 +14,3 @@ def show_notifications(request):
         notification.viewed = True
         notification.save()
     return rendered
-
-# def remove_notifications(request):
-#     html = 'notifications/notifications.html'
-#     notifications = Notification.objects.filter(tweet_author=request.user)
-
-#     for notification in notifications:
-#         notification.viewed = True
-#         notification.save()
-#     return render(request, html, {"notifications": notifications})
