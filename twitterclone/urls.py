@@ -15,6 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from django.contrib.auth.decorators import login_required
 # For page structuring:
 # https://github.com/itsthejoker/
 # templatedemo-sharedfolder/blob/master/template_test/urls.py
@@ -31,7 +32,8 @@ urlpatterns = [
     path('logout/', auth_views.logoutview, name='logout'),
     path('register/', auth_views.registration_view, name='register'),
     path('tweet-add/', tweet_views.tweetadd, name='tweet-add'),
-    path('show-notifications/', notif_views.show_notifications,
+    path('show-notifications/',
+         login_required(notif_views.ShowNotificationsView.as_view()),
          name="show-notifications"),
     path('twitter-user/<int:pk>',
          user_views.TwitterUserDetailView.as_view(),
