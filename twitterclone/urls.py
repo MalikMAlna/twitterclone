@@ -25,6 +25,12 @@ from notifications import views as notif_views
 from tweet import views as tweet_views
 from twitteruser import views as user_views
 
+
+# Citation Used this for login_required on class views:
+# https://stackoverflow.com/questions/
+# 2140550/how-to-require-login-for-django-generic-views
+
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', auth_views.index, name="homepage"),
