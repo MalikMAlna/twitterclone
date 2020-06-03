@@ -1,4 +1,5 @@
 from django.shortcuts import render, reverse, HttpResponseRedirect
+from django.shortcuts import HttpResponse
 from django.contrib import messages
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
@@ -67,6 +68,12 @@ def logoutview(request):
     messages.info(request, "Logged out successfully!")
     return HttpResponseRedirect(reverse('homepage'))
 
+# Citation: Used these urls for FormView
+# https://www.youtube.com/watch?v=ZCIQAvwtIfc
+# https://www.geeksforgeeks.org/formview-class-based-views-django/
+# https://stackoverflow.com/
+# questions/9304330/importerror-cannot-import-name-reverse-lazy
+
 
 class RegistrationFormView(FormView):
     template_name = 'authentication/register.html'
@@ -75,13 +82,6 @@ class RegistrationFormView(FormView):
 
     def form_valid(self, form):
         form.save()
-        username = form.cleaned_data.get('username')
-        raw_password = form.cleaned_data.get('password1')
-        account = authenticate(
-            username=username,
-            password=raw_password
-        )
-        login(account)
         return super(RegistrationFormView, self).form_valid(form)
     # def registration_view(request):
     #     html = 'authentication/register.html'
